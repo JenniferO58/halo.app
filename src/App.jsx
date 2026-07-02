@@ -2017,8 +2017,8 @@ const BookingDemo = () => {
     <div style={{background:T.surface,border:`1px solid ${T.border}`,borderRadius:14,overflow:"hidden",display:"flex",flexDirection:"column"}}>
       <div style={{padding:"12px 16px",borderBottom:`1px solid ${T.border}`,background:T.raised,display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
         <div style={{width:32,height:32,borderRadius:"50%",background:"#25D166",display:"flex",alignItems:"center",justifyContent:"center"}}><Bot size={16} color="#fff" strokeWidth={2}/></div>
-        <div><div style={{fontSize:13.5,fontWeight:600,color:T.text}}>Halo - WhatsApp</div><div style={{display:"flex",alignItems:"center",gap:5}}><div style={{width:5,height:5,borderRadius:"50%",background:"#25D166",animation:"halo-pulse 2s ease-in-out infinite"}}/><span style={{fontSize:11,color:"#25D166"}}>Online</span></div></div>
-        <div style={{marginLeft:"auto",fontSize:11,color:T.muted}}>Instagram DM to WhatsApp</div>
+        <div><div style={{fontSize:13.5,fontWeight:600,color:T.text}}>Halo</div><div style={{display:"flex",alignItems:"center",gap:5}}><div style={{width:5,height:5,borderRadius:"50%",background:"#25D166",animation:"halo-pulse 2s ease-in-out infinite"}}/><span style={{fontSize:11,color:"#25D166"}}>Online</span></div></div>
+        <div style={{marginLeft:"auto",fontSize:11,color:T.muted}}>Instagram DM</div>
       </div>
       <div style={{flex:1,padding:"14px 16px",minHeight:180}}>
         {phase>=0 && <Bub from="c" text="Any slots this Friday for a cut and colour?"/>}
@@ -2113,8 +2113,8 @@ const InvoiceDemo = () => {
     let t;
     if (phase===0) t=setTimeout(()=>setPhase(1),900);
     else if (phase===1) t=setTimeout(()=>setPhase(2),1600);
-    else if (phase===2) { if (charIdx<summary.length) t=setTimeout(()=>setCharIdx(i=>i+1),30); else t=setTimeout(()=>setPhase(3),700); }
-    else if (phase===3) t=setTimeout(()=>setPhase(4),4000);
+    else if (phase===2) { if (charIdx<summary.length) t=setTimeout(()=>setCharIdx(i=>i+1),30); else t=setTimeout(()=>setPhase(3),1800); }
+    else if (phase===3) t=setTimeout(()=>{},0); // stays at 3 — invoice emailed shown immediately
     else if (phase===4) t=setTimeout(()=>setPhase(5),3500);
     else if (phase===5) t=setTimeout(()=>{setPhase(0);setCharIdx(0);},400);
     return ()=>clearTimeout(t);
@@ -2171,19 +2171,12 @@ const InvoiceDemo = () => {
               <div style={{width:5,height:5,borderRadius:"50%",background:phase>=4?"#25D166":T.purple,flexShrink:0,transition:"background 0.4s"}}/>
               <span style={{fontSize:11.5,color:T.sub}}>
                 {phase===2 && <>{summary.slice(0,charIdx)}{charIdx<summary.length && <span style={{display:"inline-block",width:2,height:11,background:T.accent,marginLeft:1,verticalAlign:"text-bottom",animation:"halo-cursor 0.7s ease-in-out infinite"}}/>}</>}
-                {phase===3 && "Awaiting your approval..."}
-                {phase>=4 && "Invoice emailed to james@email.com"}
+                {phase>=3 && "Invoice emailed to james@email.com"}
               </span>
             </div>
           </div>
         )}
-        {phase===3 && (
-          <div style={{display:"flex",gap:9,animation:"halo-screen 0.3s ease"}}>
-            <button onClick={()=>setPhase(4)} style={{flex:1,padding:"10px 16px",background:T.accent,border:"none",borderRadius:8,color:"#000",fontSize:13.5,fontWeight:600,cursor:"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><Check size={13}/> Approve and send</button>
-            <button style={{padding:"10px 14px",background:"transparent",border:`1px solid ${T.border}`,borderRadius:8,color:T.sub,cursor:"pointer",fontFamily:"inherit",fontSize:13.5}}>Edit</button>
-          </div>
-        )}
-        {phase>=4 && (
+        {phase>=3 && (
           <div style={{display:"flex",alignItems:"center",gap:9,padding:"10px 14px",borderRadius:8,background:T.greenBg,border:`1px solid ${T.green}22`,animation:"halo-screen 0.3s ease"}}>
             <Check size={14} color={T.green}/><span style={{fontSize:13.5,color:T.green}}>Invoice emailed — awaiting payment</span>
           </div>
