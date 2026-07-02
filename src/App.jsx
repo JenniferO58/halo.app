@@ -1752,7 +1752,7 @@ const FtEventsVisual = ({ T }) => {
           <div style={{ fontSize:11, fontWeight:600, color:T.muted, textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:7 }}>Message</div>
           <div style={{ fontSize:13.5, color:T.text, background:T.raised, padding:"11px 14px", borderRadius:8, lineHeight:1.75, border:`1px solid ${T.border}`, borderLeft:`3px solid ${T.accent}` }}>{ev.msg}</div>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)", gap:7 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:7 }}>
           {[{l:"Intent",v:"BOOKING",c:T.blue},{l:"Confidence",v:"96%",c:T.green},{l:"Urgency",v:"HIGH",c:T.red},{l:"Action",v:"Book",c:T.accent}].map(f => (
             <div key={f.l} style={{ background:T.raised, border:`1px solid ${T.border}`, borderRadius:7, padding:"9px 11px" }}>
               <div style={{ fontSize:9.5, color:T.muted, marginBottom:3, textTransform:"uppercase", letterSpacing:"0.05em" }}>{f.l}</div>
@@ -1787,7 +1787,7 @@ const FtNotifVisual = ({ T }) => (
       <div style={{ fontSize:12, color:T.isDark?"#5A9A6A":"#555", marginBottom:12, lineHeight:1.55 }}>
         Halo has flagged this as sensitive. A refund decision needs you — it won't act without your input.
       </div>
-      <div style={{ display:"grid", gridTemplateColumns:mob?"1fr":"1fr 1fr 1fr", gap:7 }}>
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:7 }}>
         {[["Approve","#1A3A22","#25D166"],["Edit","#162A1E","#6AAA7A"],["Dismiss","#2A1818","#F87171"]].map(([label,bg,col]) => {
           const [h,setH]=useState(false);
           return <button key={label} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ padding:"9px 6px", background:h?bg+(T.isDark?"CC":"99"):(T.isDark?bg:"#fff"), border:`1px solid ${col}25`, borderRadius:9, cursor:"pointer", fontFamily:"inherit", display:"flex", flexDirection:"column", alignItems:"center", gap:3, transition:"all 0.15s" }}><span style={{ fontSize:10.5, fontWeight:600, color:col }}>{label}</span></button>;
@@ -2865,15 +2865,14 @@ const DemoSubmitBtn = ({ loading, active, onClick }) => {
 export default function App() {
   const [isDark, setIsDark] = useState(true);
   const [screen, setScreen] = useState("website");
-  const [fading, setFading] = useState(false);
+
   const [showDemo, setShowDemo] = useState(false);
   const [events, setEvents] = useState(EVENTS0);
 
   const T = isDark ? DARK : LIGHT;
 
   const navigate = (next) => {
-    setFading(true);
-    setTimeout(() => { setScreen(next); setFading(false); }, 220);
+    setScreen(next);
   };
 
   const onNavClick = ({ page, id }) => {
@@ -2924,7 +2923,7 @@ export default function App() {
         @keyframes halo-pulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
       `}</style>
 
-      <div style={{ opacity:fading?0:1, transition:"opacity 0.22s ease", height:"100vh", overflow:"hidden" }}>
+      <div style={{ height:"100vh", overflow:"hidden", background:T.page }}>
 
         {showDemo && <DemoForm onClose={()=>setShowDemo(false)} onSubmit={handleDemoSubmit}/>}
 
