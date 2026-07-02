@@ -19,13 +19,10 @@ const T_ = () => useContext(Ctx);
 const scrollTo = id => { const c = document.querySelector("[data-scroll]"); const el = document.getElementById(id); if (c && el) c.scrollTo({ top: el.offsetTop - 60, behavior: "smooth" }); };
 
 const EVENTS0 = [
-  { id:1, ch:"whatsapp", name:"Sarah Mitchell", av:"SM", elapsed:"2m",  intent:"BOOKING",   urgency:"HIGH",   status:"AUTO",      conf:96, preview:"Any slots Friday for a cut and colour?", msg:"Hi, do you have availability this Friday for a cut and colour?", reply:"Hi Sarah! We have Friday at 2pm or 4pm. Which suits you?", action:"CREATE_BOOKING", summary:"Booking Friday Cut and Colour", data:{ Service:"Cut and Colour", Day:"Friday" } },
-  { id:2, ch:"email",    name:"James Okafor",   av:"JK", elapsed:"14m", intent:"INVOICE",   urgency:"MEDIUM", status:"AUTO",      conf:99, preview:"Please send an invoice for last Tuesday.", msg:"Hi, please could you send an invoice for last Tuesday's deep tissue massage?", reply:"Hi James! Of course, your invoice is on its way now.", action:"CREATE_INVOICE", summary:"Invoice Deep Tissue Insurance", data:{ Service:"Deep Tissue", Date:"Tue 8 Apr" } },
-  { id:3, ch:"instagram",name:"@glowupldn",     av:"GL", elapsed:"32m", intent:"ENQUIRY",   urgency:"MEDIUM", status:"AUTO",      conf:91, preview:"Do you do lash lifts? How much?", msg:"Do you do lash lifts? How much?", reply:"Hey! Yes we do. Lash lifts are 45 and take about 45 mins. Want me to check availability?", action:"REPLY", summary:"Instagram DM lash lift pricing", data:{} },
-  { id:4, ch:"web",      name:"Priya Sharma",   av:"PS", elapsed:"1h",  intent:"ENQUIRY",   urgency:"LOW",    status:"AUTO",      conf:92, preview:"What are your monthly PT prices?", msg:"Hi interested in personal training. What are your monthly packages?", reply:"Hi Priya! PT packages from 55 per session.", action:"REPLY", summary:"Pricing enquiry PT", data:{} },
-  { id:5, ch:"instagram",name:"@marcus.fit",    av:"MF", elapsed:"2h",  intent:"BOOKING",   urgency:"LOW",    status:"AUTO",      conf:87, preview:"Can I book a sports massage this week?", msg:"Can I book in for a sports massage this week?", reply:"Love it! We have Wednesday 4pm and Friday 11am.", action:"REPLY", summary:"Instagram booking sports massage", data:{} },
-  { id:6, ch:"telegram", name:"Luke Morrison",  av:"LM", elapsed:"2h",  intent:"COMPLAINT", urgency:"HIGH",   status:"ESCALATED", conf:88, preview:"I want to cancel and get a refund.", msg:"I need to cancel my session. I have been waiting 3 days for a response.", reply:null, action:"ESCALATE", summary:"Cancellation and refund 3-day delay", data:{} },
-  { id:7, ch:"email",    name:"Tom Hendricks",  av:"TH", elapsed:"3h",  intent:"GENERAL",   urgency:"LOW",    status:"AUTO",      conf:85, preview:"Confirming my session tomorrow.", msg:"Just confirming I am still on for tomorrow at 7:30am!", reply:"Hi Tom! Confirmed, see you tomorrow at 7:30am.", action:"REPLY", summary:"Confirmation 7:30am", data:{} },
+  { id:1, ch:"whatsapp", name:"Sarah Mitchell", av:"SM", elapsed:"2m",  intent:"BOOKING",   urgency:"MEDIUM", status:"AUTO",      conf:96, preview:"Any slots Friday for a cut and colour?", msg:"Hi, do you have availability this Friday for a cut and colour?", reply:"Hi Sarah! We have Friday at 2pm or 4pm. Which suits you?", action:"CREATE_BOOKING", summary:"Booking Friday Cut and Colour", data:{ Service:"Cut and Colour", Day:"Friday" } },
+  { id:2, ch:"email",    name:"James Okafor",   av:"JK", elapsed:"14m", intent:"INVOICE",   urgency:"MEDIUM", status:"AUTO",      conf:99, preview:"Please send an invoice for last Tuesday.", msg:"Hi, please could you send an invoice for last Tuesday's deep tissue massage?", reply:"Hi James! Of course, your invoice is on its way now.", action:"CREATE_INVOICE", summary:"Invoice Deep Tissue Massage", data:{ Service:"Deep Tissue", Date:"Tue 8 Apr" } },
+  { id:3, ch:"instagram",name:"@glowupldn",     av:"GL", elapsed:"32m", intent:"ENQUIRY",   urgency:"LOW",    status:"AUTO",      conf:91, preview:"Do you do lash lifts? How much?", msg:"Do you do lash lifts? How much?", reply:"Hey! Yes we do. Lash lifts are £45 and take about 45 mins. Want me to check availability?", action:"REPLY", summary:"Instagram DM lash lift pricing", data:{} },
+  { id:4, ch:"whatsapp", name:"Luke Morrison",  av:"LM", elapsed:"2h",  intent:"COMPLAINT", urgency:"HIGH",   status:"ESCALATED", conf:38, preview:"I want a refund. Been waiting 3 days.", msg:"I want to cancel my appointment and I want a full refund. Been waiting 3 days for a response and this is unacceptable.", reply:null, action:"ESCALATE", summary:"Refund request — 3 day delay", data:{} },
 ];
 const CH = { whatsapp:{icon:"WA",label:"WhatsApp"}, email:{icon:"EM",label:"Email"}, web:{icon:"WB",label:"Web"}, telegram:{icon:"TG",label:"Telegram"}, instagram:{icon:"IG",label:"Instagram"}, form:{icon:"FM",label:"Form"} };
 const INTG = [
@@ -712,6 +709,14 @@ const PreviewPipelineView = () => {
   const [res, setRes] = useState(null);
   const [focused, setFocused] = useState(false);
   const STEPS = [{ icon:"📥", label:"Received" }, { icon:"🧠", label:"Classifying" }, { icon:"✍️", label:"Generating reply" }, { icon:"📲", label:"Building notification" }];
+  const getFallback = (text) => {
+    const t = text.toLowerCase();
+    if (t.includes("refund") || t.includes("cancel") || t.includes("complaint") || t.includes("waiting") || t.includes("unhappy")) return { intent:"COMPLAINT", confidence:42, urgency:"HIGH", suggestedAction:"ESCALATE", suggestedReply:null, summary:"Customer complaint requiring direct response" };
+    if (t.includes("invoice") || t.includes("bill") || t.includes("receipt") || t.includes("payment")) return { intent:"INVOICE", confidence:97, urgency:"MEDIUM", suggestedAction:"CREATE_INVOICE", suggestedReply:"Hi! Of course, your invoice is on its way now.", summary:"Invoice request" };
+    if (t.includes("book") || t.includes("appointment") || t.includes("slot") || t.includes("availability") || t.includes("available") || t.includes("saturday") || t.includes("friday") || t.includes("monday") || t.includes("tuesday") || t.includes("wednesday") || t.includes("thursday")) return { intent:"BOOKING", confidence:94, urgency:"HIGH", suggestedAction:"CREATE_BOOKING", suggestedReply:"Hi! Let me check availability for you — I'll confirm a slot shortly.", summary:"Booking request" };
+    if (t.includes("price") || t.includes("cost") || t.includes("how much") || t.includes("charge") || t.includes("fee")) return { intent:"ENQUIRY", confidence:88, urgency:"LOW", suggestedAction:"REPLY", suggestedReply:"Hi! Happy to share our pricing — what service are you interested in?", summary:"Pricing enquiry" };
+    return { intent:"ENQUIRY", confidence:82, urgency:"LOW", suggestedAction:"REPLY", suggestedReply:"Hi! Thanks for getting in touch. How can I help you today?", summary:"General enquiry" };
+  };
   const run = async () => {
     if (!msg.trim() || phase >= 0) return;
     setRes(null); setPhase(0);
@@ -720,11 +725,17 @@ const PreviewPipelineView = () => {
       const d = await callAI({ model:"claude-sonnet-4-5", max_tokens:500, system:CLF_SYS, messages:[{ role:"user", content:"Customer message: " + msg }] });
       const raw = d.content?.find(b => b.type==="text")?.text || "{}";
       const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
+      const result = (parsed && parsed.intent) ? parsed : getFallback(msg);
       await new Promise(r => setTimeout(r, 350)); setPhase(2);
       await new Promise(r => setTimeout(r, 400)); setPhase(3);
       await new Promise(r => setTimeout(r, 300)); setPhase(4);
-      setRes(parsed);
-    } catch { setPhase(4); }
+      setRes(result);
+    } catch {
+      await new Promise(r => setTimeout(r, 350)); setPhase(2);
+      await new Promise(r => setTimeout(r, 400)); setPhase(3);
+      await new Promise(r => setTimeout(r, 300)); setPhase(4);
+      setRes(getFallback(msg));
+    }
   };
   const reset = () => { setPhase(-1); setRes(null); };
   const iC = res ? getIC(T, res.intent) : null;
@@ -891,15 +902,15 @@ const NOTIF_EXAMPLES = [
   { name:"Sarah Mitchell", ch:"WhatsApp", msg:"Hi! Any slots this Friday for a cut and colour?", intent:"BOOKING", conf:96, reply:"Hi Sarah! We have Friday at 2pm or 4pm — which works best for you? I'll confirm straight away.", av:"SM", handled:true },
   { name:"James Okafor",   ch:"Email",    msg:"Please send over an invoice for last Tuesday's deep tissue massage.", intent:"INVOICE", conf:99, reply:"Hi James! Of course, your invoice is attached. Let me know if you have any questions.", av:"JK", handled:true },
   { name:"@glowupldn",     ch:"Instagram",msg:"Do you do lash lifts? How much?", intent:"ENQUIRY", conf:91, reply:"Hey! Yes, lash lifts are £45 and take about 45 mins. Want me to check availability for you?", av:"GL", handled:true },
-  { name:"Priya Sharma",   ch:"WhatsApp", msg:"Hi, I booked a facial for next Tuesday but I need to change it — can we move it AND also add a lash tint at the same time? Not sure if you have space.", intent:"BOOKING", conf:63, reply:"Hi Priya! Happy to move your facial — let me check availability for the combined appointment. Could you let me know which days work best for you?", av:"PS", handled:false },
-  { name:"Luke Morrison",  ch:"WhatsApp", msg:"I want to cancel my appointment and I want a full refund. Been waiting 3 days for a response and this is unacceptable.", intent:"COMPLAINT", conf:41, reply:null, av:"LM", handled:false, escalated:true },
+  { name:"Priya Sharma",   ch:"WhatsApp", msg:"Hi, my highlights from last week came out really brassy — I'm not happy with them. Can I come back in for a correction? Would there be a charge?", intent:"COMPLAINT", conf:58, reply:"Hi Priya, I'm really sorry to hear that. I'd love to make it right — let me check availability for a correction appointment. Could I ask you to send a photo so we can see what we're working with?", av:"PS", handled:false },
+  { name:"Luke Morrison",  ch:"WhatsApp", msg:"I want to cancel my appointment and I want a full refund. Been waiting 3 days for a response and this is unacceptable.", intent:"COMPLAINT", conf:38, reply:null, av:"LM", handled:false, escalated:true },
 ];
 
 const PreviewNotificationsView = () => {
   const T = T_();
   const [approved, setApproved] = useState(false);
 
-  // The one that needs approval — a multi-part rescheduling request
+  // The one that needs approval — service quality complaint, owner decides on free correction
   const flagged = NOTIF_EXAMPLES[3];
   const autoHandled = NOTIF_EXAMPLES.filter(n => n.handled);
 
@@ -1763,18 +1774,18 @@ const FtNotifVisual = ({ T }) => (
     <div style={{ background:T.isDark?"#0B1410":"#F0FAF1", borderRadius:20, padding:"22px", border:`1px solid ${T.isDark?"rgba(37,209,102,0.14)":"rgba(37,209,102,0.3)"}`, maxWidth:340, width:"100%" }}>
       <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:16, paddingBottom:14, borderBottom:`1px solid ${T.isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)"}` }}>
         <div style={{ width:40, height:40, borderRadius:"50%", background:"#25D166", display:"flex", alignItems:"center", justifyContent:"center" }}><Bot size={20} color="#fff" strokeWidth={2}/></div>
-        <div><div style={{ fontSize:15, fontWeight:700, color:T.isDark?"#D9FDD3":"#111" }}>Halo</div><div style={{ fontSize:12, color:T.isDark?"#4A8A5A":"#555" }}>Needs your input · 63% confident</div></div>
+        <div><div style={{ fontSize:15, fontWeight:700, color:T.isDark?"#D9FDD3":"#111" }}>Halo</div><div style={{ fontSize:12, color:T.isDark?"#4A8A5A":"#555" }}>Needs your input · 38% confident</div></div>
         <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:5 }}><div style={{ width:7, height:7, borderRadius:"50%", background:"#FBBF24" }}/><span style={{ fontSize:11, color:"#FBBF24", fontWeight:600 }}>Review</span></div>
       </div>
       <div style={{ background:T.isDark?"#1A3020":"#D9FDD3", borderRadius:"4px 16px 16px 16px", padding:"13px 15px", marginBottom:12 }}>
-        <div style={{ fontSize:11.5, fontWeight:700, color:"#25D166", letterSpacing:"0.04em", marginBottom:5 }}>MULTI-PART REQUEST</div>
+        <div style={{ fontSize:11.5, fontWeight:700, color:"#FF6B6B", letterSpacing:"0.04em", marginBottom:5 }}>REFUND REQUEST</div>
         <div style={{ fontSize:13, color:T.isDark?"#C8EED4":"#111", lineHeight:1.75 }}>
-          <span style={{ color:T.isDark?"#6AAA7A":"#444" }}>From: </span><span style={{ fontWeight:600 }}>Priya Sharma</span><br/>
-          <span style={{ fontStyle:"italic", color:T.isDark?"#A0C8A8":"#333" }}>"Can we move Tuesday's facial to Thursday and add a gel manicure? Not sure if you have time for both."</span>
+          <span style={{ color:T.isDark?"#6AAA7A":"#444" }}>From: </span><span style={{ fontWeight:600 }}>Luke Morrison</span><br/>
+          <span style={{ fontStyle:"italic", color:T.isDark?"#A0C8A8":"#333" }}>"I wasn't happy with my last appointment and I want a full refund. This is unacceptable."</span>
         </div>
       </div>
       <div style={{ fontSize:12, color:T.isDark?"#5A9A6A":"#555", marginBottom:12, lineHeight:1.55 }}>
-        Halo has drafted a reply but wants your confirmation before checking the combined slot.
+        Halo has flagged this as sensitive. A refund decision needs you — it won't act without your input.
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:7 }}>
         {[["Approve","#1A3A22","#25D166"],["Edit","#162A1E","#6AAA7A"],["Dismiss","#2A1818","#F87171"]].map(([label,bg,col]) => {
