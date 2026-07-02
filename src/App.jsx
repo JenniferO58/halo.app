@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext, createContext } from "react";
 import { Bot, Zap, MessageSquare, Layers, ArrowRight, Check, ChevronDown, Sun, Moon, Search, Bell, Send, Play, LayoutDashboard, Settings, MoreHorizontal, Copy, RefreshCw, AlertCircle, X, Eye, EyeOff, Menu, Plus, Calendar } from "lucide-react";
- 
+
 const useW = () => {
   const [w, setW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
   useEffect(() => { const fn = () => setW(window.innerWidth); window.addEventListener("resize", fn); return () => window.removeEventListener("resize", fn); }, []);
@@ -1984,7 +1984,7 @@ const BOOK_STEPS = [
   { Icon:MessageSquare, col:"#25D166", title:"Customer reaches out",      desc:"A message arrives via WhatsApp, Instagram DM, email, or your web widget.", detail:'e.g. "Any slots this Friday for a cut and colour?"' },
   { Icon:Zap,           col:"#E8945A", title:"Halo classifies instantly",  desc:"Intent detected as BOOKING in under 2 seconds. Service and date extracted.", detail:"Confidence: 96% - Action: Create Booking" },
   { Icon:Bot,           col:"#60A5FA", title:"Availability checked",       desc:"Halo queries Google Calendar in real time and finds your open slots.", detail:"Friday 14:00 and 16:00 are both available" },
-  { Icon:Send,          col:"#E8945A", title:"Reply sent after approval",  desc:"Halo drafts the reply and sends it after your one-tap approval on WhatsApp.", detail:null },
+  { Icon:Send,          col:"#E8945A", title:"Reply sent automatically",    desc:"Halo sends a confirmation reply instantly. No input needed from you.", detail:null },
   { Icon:Check,         col:"#4ADE80", title:"Booking confirmed",          desc:"Customer confirms. Halo creates the calendar event and sends a confirmation.", detail:"Calendar event created - Confirmation sent" },
 ];
 
@@ -2100,7 +2100,7 @@ const INV_STEPS = [
   { Icon:MessageSquare, col:"#A78BFA", title:"Customer requests an invoice", desc:"Message arrives: Can you send me an invoice for last Tuesday?", detail:"Channel: Email - Intent: INVOICE - Confidence: 99%" },
   { Icon:Zap,           col:"#E8945A", title:"Halo extracts the details",     desc:"Service, date, and customer name pulled automatically from the message.", detail:"Service: Deep Tissue - Date: Tue 8 Apr - Rate: 65" },
   { Icon:Bot,           col:"#A78BFA", title:"Invoice generated with AI",     desc:"Halo builds a professional invoice with correct line items and due date.", detail:"INV-0047 - 65.00 - Due in 7 days" },
-  { Icon:Check,         col:"#E8945A", title:"You review and approve",        desc:"Preview the invoice in your dashboard. Edit any line before it goes out.", detail:null },
+  { Icon:Send,          col:"#E8945A", title:"Invoice emailed to customer",   desc:"Halo sends the invoice directly to the customer. For amounts above your threshold, you get a one-tap review first.", detail:null },
   { Icon:Send,          col:"#4ADE80", title:"Invoice emailed to the customer",desc:"Halo emails the PDF invoice and logs the payment as outstanding.", detail:"Invoice sent - Awaiting payment" },
 ];
 
@@ -2205,7 +2205,7 @@ const InvoicesPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav 
           <FadeIn><button onClick={() => onNav({page:"features",id:"features-top"})} style={{ display:"inline-flex", alignItems:"center", gap:6, fontSize:13, color:T.sub, background:"transparent", border:"none", cursor:"pointer", fontFamily:"inherit", marginBottom:28 }} onMouseEnter={e=>e.currentTarget.style.color=T.text} onMouseLeave={e=>e.currentTarget.style.color=T.sub}><ArrowRight size={12} style={{transform:"rotate(180deg)"}}/> Back to features</button></FadeIn>
           <FadeIn delay={60}><div style={{ display:"inline-flex", alignItems:"center", gap:7, padding:"5px 14px", borderRadius:99, border:`1px solid ${T.purple}30`, background:T.purple+"10", marginBottom:24 }}><Layers size={11} color={T.purple}/><span style={{ fontSize:12.5, color:T.purple, fontWeight:500 }}>Invoice automation</span></div></FadeIn>
           <FadeIn delay={100}><h1 style={{ fontSize:`clamp(${mob?"34px":"44px"},5vw,72px)`, fontWeight:600, color:T.text, lineHeight:1.06, letterSpacing:"-0.04em", marginBottom:20, fontFamily:"DM Serif Display,serif" }}>Invoices sent before you can think twice.</h1></FadeIn>
-          <FadeIn delay={160}><p style={{ fontSize:mob?16:18, color:T.sub, lineHeight:1.75, maxWidth:520, margin:"0 auto 36px" }}>A customer asks for an invoice. Halo reads the request, builds the document, and emails it — with one tap from you.</p></FadeIn>
+          <FadeIn delay={160}><p style={{ fontSize:mob?16:18, color:T.sub, lineHeight:1.75, maxWidth:520, margin:"0 auto 36px" }}>A customer asks for an invoice. Halo reads the request, builds the document, and emails it automatically. For high-value invoices, you set the threshold.</p></FadeIn>
           <FadeIn delay={220}><div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
             <button onClick={onSignup} style={{ padding:"12px 26px", background:T.purple, border:"none", borderRadius:9, cursor:"pointer", fontSize:14.5, fontWeight:600, color:"#fff", fontFamily:"inherit", display:"flex", alignItems:"center", gap:7 }} onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>Start for free <ArrowRight size={14}/></button>
             <button onClick={onBookDemo} style={{ padding:"12px 26px", background:"transparent", border:`1px solid ${T.border}`, borderRadius:9, cursor:"pointer", fontSize:14.5, color:T.sub, fontFamily:"inherit" }} onMouseEnter={e=>{e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.color=T.text;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border;e.currentTarget.style.color=T.sub;}}>Book a demo</button>
