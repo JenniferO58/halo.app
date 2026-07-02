@@ -1752,7 +1752,7 @@ const FtEventsVisual = ({ T }) => {
           <div style={{ fontSize:11, fontWeight:600, color:T.muted, textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:7 }}>Message</div>
           <div style={{ fontSize:13.5, color:T.text, background:T.raised, padding:"11px 14px", borderRadius:8, lineHeight:1.75, border:`1px solid ${T.border}`, borderLeft:`3px solid ${T.accent}` }}>{ev.msg}</div>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:7 }}>
+        <div style={{ display:"grid", gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)", gap:7 }}>
           {[{l:"Intent",v:"BOOKING",c:T.blue},{l:"Confidence",v:"96%",c:T.green},{l:"Urgency",v:"HIGH",c:T.red},{l:"Action",v:"Book",c:T.accent}].map(f => (
             <div key={f.l} style={{ background:T.raised, border:`1px solid ${T.border}`, borderRadius:7, padding:"9px 11px" }}>
               <div style={{ fontSize:9.5, color:T.muted, marginBottom:3, textTransform:"uppercase", letterSpacing:"0.05em" }}>{f.l}</div>
@@ -1787,7 +1787,7 @@ const FtNotifVisual = ({ T }) => (
       <div style={{ fontSize:12, color:T.isDark?"#5A9A6A":"#555", marginBottom:12, lineHeight:1.55 }}>
         Halo has flagged this as sensitive. A refund decision needs you — it won't act without your input.
       </div>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:7 }}>
+      <div style={{ display:"grid", gridTemplateColumns:mob?"1fr":"1fr 1fr 1fr", gap:7 }}>
         {[["Approve","#1A3A22","#25D166"],["Edit","#162A1E","#6AAA7A"],["Dismiss","#2A1818","#F87171"]].map(([label,bg,col]) => {
           const [h,setH]=useState(false);
           return <button key={label} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ padding:"9px 6px", background:h?bg+(T.isDark?"CC":"99"):(T.isDark?bg:"#fff"), border:`1px solid ${col}25`, borderRadius:9, cursor:"pointer", fontFamily:"inherit", display:"flex", flexDirection:"column", alignItems:"center", gap:3, transition:"all 0.15s" }}><span style={{ fontSize:10.5, fontWeight:600, color:col }}>{label}</span></button>;
@@ -1856,7 +1856,7 @@ const FeaturesPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav 
   const [tab, setTab] = useState("events");
   const cur = FT_TABS.find(t => t.id === tab);
   return (
-    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", transition:"background 0.25s,color 0.25s" }}>
+    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", overflowX:"hidden", WebkitOverflowScrolling:"touch", transition:"background 0.25s,color 0.25s" }}>
       <SiteNav isDark={isDark} onToggle={onToggle} onSignin={onSignin} onSignup={onSignup} screen="features" onNav={onNav}/>
       <section id="features-top" style={{ padding:`${mob?80:100}px ${mob?20:28}px ${mob?40:56}px`, textAlign:"center", position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", inset:0, backgroundImage:`linear-gradient(${T.grid} 1px,transparent 1px),linear-gradient(90deg,${T.grid} 1px,transparent 1px)`, backgroundSize:"64px 64px", pointerEvents:"none" }}/>
@@ -2049,7 +2049,7 @@ const BookingDemo = () => {
 const BookingsPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }) => {
   const T = T_(); const w = useW(); const mob = w < 768;
   return (
-    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", transition:"background 0.25s,color 0.25s" }}>
+    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", overflowX:"hidden", WebkitOverflowScrolling:"touch", transition:"background 0.25s,color 0.25s" }}>
       <SiteNav isDark={isDark} onToggle={onToggle} onSignin={onSignin} onSignup={onSignup} screen="bookings" onNav={onNav}/>
       <section id="top" style={{ padding:`${mob?80:100}px ${mob?20:28}px ${mob?48:64}px`, textAlign:"center", position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", inset:0, backgroundImage:`linear-gradient(${T.grid} 1px,transparent 1px),linear-gradient(90deg,${T.grid} 1px,transparent 1px)`, backgroundSize:"64px 64px", pointerEvents:"none" }}/>
@@ -2189,7 +2189,7 @@ const InvoiceDemo = () => {
 const InvoicesPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }) => {
   const T = T_(); const w = useW(); const mob = w < 768;
   return (
-    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", transition:"background 0.25s,color 0.25s" }}>
+    <div data-scroll="" style={{ background:T.page, color:T.text, height:"100vh", overflowY:"auto", overflowX:"hidden", WebkitOverflowScrolling:"touch", transition:"background 0.25s,color 0.25s" }}>
       <SiteNav isDark={isDark} onToggle={onToggle} onSignin={onSignin} onSignup={onSignup} screen="invoices" onNav={onNav}/>
       <section id="top" style={{ padding:`${mob?80:100}px ${mob?20:28}px ${mob?48:64}px`, textAlign:"center", position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", inset:0, backgroundImage:`linear-gradient(${T.grid} 1px,transparent 1px),linear-gradient(90deg,${T.grid} 1px,transparent 1px)`, backgroundSize:"64px 64px", pointerEvents:"none" }}/>
@@ -2907,6 +2907,9 @@ export default function App() {
         *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
         html { scroll-behavior:smooth; }
         body { font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { overflow-x: hidden; max-width: 100vw; }
+        img, video, iframe, svg { max-width: 100%; }
         ::selection { background:${T.accentBg}; }
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-track { background:transparent; }
