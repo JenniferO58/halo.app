@@ -130,8 +130,8 @@ const getIC = (T, i) => ({ BOOKING:{text:T.blue,bg:T.blueBg}, ENQUIRY:{text:T.ac
 const getSC = (T, s) => ({ PENDING:{text:T.yellow,bg:T.yellowBg,label:"Needs approval"}, AUTO:{text:T.green,bg:T.greenBg,label:"Auto-handled"}, ESCALATED:{text:T.red,bg:T.redBg,label:"Escalated"}, DONE:{text:T.accent,bg:T.accentBg,label:"Sent"}, DISMISSED:{text:T.muted,bg:T.raised,label:"Dismissed"} }[s] || {text:T.muted,bg:T.raised,label:s});
 const ACTION_LABELS = { REPLY:"Send Reply", CREATE_BOOKING:"Create Booking", CREATE_INVOICE:"Create Invoice", ESCALATE:"Escalate" };
 const INVOICE_PROMPT = "You are a billing assistant. Return ONLY valid JSON (no markdown): {invoiceNumber,date,dueDate,lineItems:[{description,quantity,unitPrice,total}],subtotal,tax,total}. Realistic UK service pricing.";
-const CLF_SYS = "Return ONLY valid JSON, no markdown, no backticks. Fields: intent (BOOKING|ENQUIRY|INVOICE|COMPLAINT|GENERAL), confidence (0-100), urgency (LOW|MEDIUM|HIGH), summary (string), suggestedReply (string), suggestedAction (REPLY|CREATE_BOOKING|CREATE_INVOICE|ESCALATE).";
-const AI_SYS = "You are Halo, an AI employee for small UK service businesses. You write in the business's own tone using their services, pricing, policies, and customer history stored in Halo Memory. Help with customer communications, bookings, invoices, pricing, complaints, and business strategy. Be concise, warm, and practical. Keep responses under 120 words.";
+const CLF_SYS = "You are an AI assistant for a UK service business. Return ONLY valid JSON, no markdown, no backticks. Always use British pounds (£) for any prices mentioned. Fields: intent (BOOKING|ENQUIRY|INVOICE|COMPLAINT|GENERAL), confidence (0-100), urgency (LOW|MEDIUM|HIGH), summary (string), suggestedReply (string, always use £ for prices), suggestedAction (REPLY|CREATE_BOOKING|CREATE_INVOICE|ESCALATE).";
+const AI_SYS = "You are Halo, an AI employee for small UK service businesses. You write in the business's own tone using their services, pricing, policies, and customer history stored in Halo Memory. Always use British pounds (£) for any prices — never use $ or USD. Help with customer communications, bookings, invoices, pricing, complaints, and business strategy. Be concise, warm, and practical. Keep responses under 120 words.";
 
 
 const callAI = async (body) => {
@@ -2580,7 +2580,7 @@ const DbAssistantView = ({ isMobile }) => {
   const send=async text=>{
     if(!text.trim()||load)return;
     const m=[...msgs,{role:"user",content:text}]; setMsgs(m);setInp("");setLoad(true);
-    try{const d=await callAI({model:"claude-sonnet-4-5",max_tokens:1000,system:"You are Halo, an AI business assistant for small UK service businesses. Be concise, warm, and practical.",messages:m});setMsgs(p=>[...p,{role:"assistant",content:d.content?.find(b=>b.type==="text")?.text||"Something went wrong."}]);}
+    try{const d=await callAI({model:"claude-sonnet-4-5",max_tokens:1000,system:"You are Halo, an AI business assistant for small UK service businesses. Always use British pounds (£) for any prices — never use $ or USD. Be concise, warm, and practical.",messages:m});setMsgs(p=>[...p,{role:"assistant",content:d.content?.find(b=>b.type==="text")?.text||"Something went wrong."}]);}
     catch{setMsgs(p=>[...p,{role:"assistant",content:"Connection error."}]);}
     setLoad(false);
   };
