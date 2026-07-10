@@ -259,14 +259,14 @@ const Hero = ({ onSignup, onNav }) => {
           </div>
         </FadeIn>
         <FadeIn delay={80}>
-          <h1 style={{ fontSize:`clamp(${mob?"38px":"52px"},8vw,96px)`, fontWeight:600, color:T.text, lineHeight:1.06, letterSpacing:"-0.04em", marginBottom:mob?12:16, fontFamily:"DM Serif Display,serif" }}>
+          <h1 style={{ fontSize:`clamp(${mob?"38px":"52px"},8vw,96px)`, fontWeight:600, color:T.text, lineHeight:1.06, letterSpacing:"-0.04em", marginBottom:mob?20:28, fontFamily:"DM Serif Display,serif" }}>
             Meet Halo.
           </h1>
         </FadeIn>
-        <FadeIn delay={120}>
-          <h2 style={{ fontSize:`clamp(${mob?"18px":"22px"},3vw,32px)`, fontWeight:400, color:T.accent, lineHeight:1.3, letterSpacing:"-0.02em", marginBottom:mob?28:40, fontFamily:"DM Serif Display,serif", fontStyle:"italic" }}>
-            The AI layer that surrounds your business operations.
-          </h2>
+        <FadeIn delay={140}>
+          <p style={{ fontSize:mob?16:19, color:T.sub, lineHeight:1.8, maxWidth:560, margin:`0 auto ${mob?28:40}px` }}>
+            Halo manages your customer enquiries, bookings, invoices and day-to-day admin in your tone, across your existing channels. You stay in control. The admin disappears.
+          </p>
         </FadeIn>
         <FadeIn delay={220}>
           <div style={{ display:"flex", flexDirection:mob?"column":"row", gap:12, justifyContent:"center", marginBottom:mob?32:44 }}>
