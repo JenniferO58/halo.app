@@ -43,60 +43,63 @@ const NAV = [
 const PRICING = [
   {
     name:"Starter", tag:"Your First AI Employee", mo:29, yr:23, pop:false,
-    bestFor:"Solo business owners who want to stop spending evenings replying to customers.",
-    saves:"Around 5–8 hours per week.",
-    desc:"One AI employee, ready from day one. No setup fees, no technical knowledge needed.",
+    bestFor:"Solo business owners who want to stop losing time to messages, bookings, and admin.",
+    saves:"Save hours every week by automating repetitive customer tasks.",
+    desc:"Your AI employee for handling customer enquiries, bookings, and everyday admin. Set up in minutes with no technical knowledge required.",
+    mindset:"Halo helps me manage customers.",
     features:[
-      "14-day free trial — no credit card required",
-      "300 AI Events per month",
       "WhatsApp Business integration",
+      "Instagram integration",
       "Email integration",
-      "AI message drafting",
+      "Website enquiries",
+      "AI message handling",
       "Automatic enquiry classification",
       "Confidence-based automation",
-      "One-tap approval via WhatsApp",
+      "One-tap approval",
       "Business tone and FAQ setup",
+      "Booking automation",
+      "Google Calendar sync",
+      "Basic invoice generation",
       "Basic analytics",
       "Email support",
+      "Early access — be among the first to use Halo",
     ],
   },
   {
     name:"Growth", tag:"Your AI Office Manager", mo:69, yr:55, pop:true,
-    bestFor:"Businesses receiving enquiries every day who want the complete automation experience.",
-    saves:"Around 8–12 hours per week.",
-    desc:"Everything in Starter, plus the tools growing businesses need to run on autopilot.",
+    bestFor:"Busy businesses with volume who want more of their operations running automatically.",
+    saves:"More of your business runs without your involvement.",
+    desc:"Your AI office manager that keeps your business running smoothly.",
+    mindset:"Halo helps me run the business.",
     features:[
       "Everything in Starter",
-      "Unlimited AI Events",
-      "Instagram integration",
-      "Website chat integration",
-      "Google Calendar sync",
-      "Automatic appointment booking",
-      "Invoice generation",
+      "Unlimited AI events",
+      "Advanced Halo Memory",
+      "Automated invoice workflows",
       "Payment reminders",
-      "Halo Memory",
-      "AI Assistant",
       "Custom business reports",
       "Review request automation",
+      "Advanced workflows",
+      "Multiple workspaces",
       "Priority support",
-      "3 workspaces",
     ],
   },
   {
-    name:"Agency", tag:"Scale Every Client", mo:null, yr:null, pop:false,
-    bestFor:"Agencies, consultants, and businesses managing multiple locations or clients.",
-    saves:"Hours across every client account while standardising operations.",
-    desc:"Everything in Growth, built for teams managing multiple businesses from one place.",
+    name:"Agency", tag:"Manage operations at scale", mo:null, yr:null, pop:false,
+    bestFor:"Agencies and businesses managing multiple locations or clients.",
+    saves:"Standardise operations across every client and location.",
+    desc:"Everything in Growth, built for teams operating at scale.",
+    mindset:"Halo helps me manage operations at scale.",
     features:[
       "Everything in Growth",
       "Unlimited workspaces",
-      "White-label platform",
+      "White-label option",
       "Team permissions",
-      "Shared reporting dashboard",
       "Client management",
-      "Dedicated onboarding",
+      "Shared reporting dashboard",
       "API access (coming soon)",
       "Dedicated account manager",
+      "Dedicated onboarding",
     ],
   },
 ];
@@ -110,13 +113,9 @@ const FAQS = [
   { q:"What happens after my 14-day trial?", a:"You will be asked to choose a plan. If you do not, your account pauses — no charges, no data deleted. You can reactivate any time. We do not do surprise billing." },
   { q:"Can I customise how Halo responds?", a:"Absolutely. Halo Memory stores your exact tone of voice, service descriptions, pricing, policies, and preferences. Your AI employee replies the way you would reply — not with generic AI text. You can also set which types of messages auto-handle and which come to you for approval." },
   { q:"Is my customers' data secure?", a:"All data is encrypted in transit and at rest. Halo is GDPR compliant. Customer messages are processed to generate responses and are never used to train AI models. You can export or delete all data at any time." },
-  { q:"How long does setup take?", a:"Most businesses are live in under 10 minutes. Connect your first channel, add your services and pricing to Halo Memory, and your AI employee starts responding. There is nothing to install and no technical knowledge required." },
+  { q:"How long does setup take?", a:"Most businesses are get started in minutes. Connect your first channel, add your services and pricing to Halo Memory, and your AI employee starts responding. There is nothing to install and no technical knowledge required." },
 ];
-const TESTIMONIALS = [
-  { name:"Sophie Adeyemi", role:"Owner, Lumi Hair Studio, London", quote:"I used to spend 45 minutes every morning going through WhatsApps and emails. Halo now handles 80% of it automatically. My first booking came through at 6am while I was asleep.", av:"SA" },
-  { name:"Marcus Webb", role:"Personal Trainer, Manchester", quote:"The WhatsApp notifications are what got me. I approve a reply in one tap between sets and it is done. Clients think I am incredibly responsive. They have no idea it is Halo.", av:"MW" },
-  { name:"Dr. Priya Nair", role:"Founder, Clarity Wellness Clinic, Birmingham", quote:"We handle 200+ enquiries a week. Before Halo we had a part-time admin. Now it is just me and Halo, and the response quality is better than it has ever been.", av:"PN" },
-];
+const TESTIMONIALS = [];
 const COMPARISON = [
   { f:"Responds to enquiries",    manual:"You, manually",  bot:"Basic auto-reply",  halo:"In your tone, in context" },
   { f:"Books appointments",       manual:"You, manually",  bot:"No",                halo:"With calendar sync" },
@@ -174,13 +173,13 @@ const AnnouncementBar = ({ onSignup }) => {
       <div style={{ display:"flex", alignItems:"center", gap:6 }}>
         <div style={{ width:6, height:6, borderRadius:"50%", background:T.accent }} className="halo-pulse"/>
         <span style={{ fontSize:12, color:T.isDark?"#E8C4A0":"#92400E", fontWeight:500 }}>
-          Now trusted by 200+ UK service businesses —{" "}
+          Halo is now in early access —{" "}
           <span style={{ color:T.accent, fontWeight:600 }}>{businesses[idx]}</span>
-          {" "}and more. Your AI employee is ready in under 10 minutes.
+          {" "}and more. Be one of the first to use it.
         </span>
       </div>
       <button onClick={onSignup} style={{ display:"inline-flex", alignItems:"center", gap:4, fontSize:12, fontWeight:600, color:T.accent, background:"transparent", border:"none", cursor:"pointer", fontFamily:"inherit", textDecoration:"underline", textUnderlineOffset:2, whiteSpace:"nowrap" }}>
-        Claim yours <ArrowRight size={11}/>
+        Join early access <ArrowRight size={11}/>
       </button>
       <button onClick={() => setVis(false)} style={{ position:"absolute", right:14, background:"none", border:"none", cursor:"pointer", color:T.muted }}><X size={13}/></button>
     </div>
@@ -220,7 +219,7 @@ const SiteNav = ({ isDark, onToggle, onSignin, onSignup, screen, onNav }) => {
           <ThemeBtn isDark={isDark} onToggle={onToggle}/>
           {!mob && <>
             <button onClick={onSignin} style={{ padding:"8px 16px", background:"transparent", border:`1px solid ${T.border}`, borderRadius:7, cursor:"pointer", fontSize:13.5, color:T.sub, fontFamily:"inherit" }}>Sign in</button>
-            <button onClick={onSignup} style={{ padding:"8px 18px", background:T.accent, border:"none", borderRadius:7, cursor:"pointer", fontSize:13.5, fontWeight:600, color:"#000", fontFamily:"inherit" }}>Get started free</button>
+            <button onClick={onSignup} style={{ padding:"8px 18px", background:T.accent, border:"none", borderRadius:7, cursor:"pointer", fontSize:13.5, fontWeight:600, color:"#000", fontFamily:"inherit" }}>Join early access</button>
           </>}
           {mob && <button onClick={() => setOpen(v => !v)} style={{ width:36, height:36, borderRadius:8, border:`1px solid ${T.border}`, background:"transparent", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", color:T.sub }}>{open ? <X size={16}/> : <Menu size={16}/>}</button>}
         </div>
@@ -230,7 +229,7 @@ const SiteNav = ({ isDark, onToggle, onSignin, onSignup, screen, onNav }) => {
           {NAV.map(n => <button key={n.label} onClick={() => { onNav(n); setOpen(false); }} style={{ display:"block", width:"100%", textAlign:"left", padding:"12px 0", background:"none", border:"none", borderBottom:`1px solid ${T.border}`, fontSize:15, color:T.sub, cursor:"pointer", fontFamily:"inherit" }}>{n.label}</button>)}
           <div style={{ display:"flex", flexDirection:"column", gap:10, marginTop:16 }}>
             <button onClick={() => { setOpen(false); onSignin(); }} style={{ padding:"12px", borderRadius:8, border:`1px solid ${T.border}`, background:"transparent", fontSize:15, color:T.text, cursor:"pointer", fontFamily:"inherit" }}>Sign in</button>
-            <button onClick={() => { setOpen(false); onSignup(); }} style={{ padding:"12px", borderRadius:8, border:"none", background:T.accent, fontSize:15, fontWeight:600, color:"#000", cursor:"pointer", fontFamily:"inherit" }}>Get started free</button>
+            <button onClick={() => { setOpen(false); onSignup(); }} style={{ padding:"12px", borderRadius:8, border:"none", background:T.accent, fontSize:15, fontWeight:600, color:"#000", cursor:"pointer", fontFamily:"inherit" }}>Join early access</button>
           </div>
         </div>
       )}
@@ -273,7 +272,7 @@ const Hero = ({ onSignup, onNav }) => {
           <div style={{ display:"flex", flexDirection:mob?"column":"row", gap:12, justifyContent:"center", marginBottom:mob?32:44 }}>
             <button onClick={onSignup} style={{ padding:"14px 30px", background:T.accent, border:"none", borderRadius:9, cursor:"pointer", fontSize:15, fontWeight:600, color:"#000", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:8, width:mob?"100%":"auto" }}
               onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
-              Start free — no card needed <ArrowRight size={15}/>
+              Join early access <ArrowRight size={15}/>
             </button>
             <button onClick={() => onNav({page:"pricing",id:"top"})} style={{ padding:"14px 30px", background:"transparent", border:`1px solid ${T.border}`, borderRadius:9, cursor:"pointer", fontSize:15, color:T.sub, fontFamily:"inherit", width:mob?"100%":"auto" }}
               onMouseEnter={e=>{e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.color=T.text;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border;e.currentTarget.style.color=T.sub;}}>
@@ -282,27 +281,10 @@ const Hero = ({ onSignup, onNav }) => {
           </div>
         </FadeIn>
 
-        {/* Social proof strip */}
         <FadeIn delay={280}>
-          <div style={{ display:"flex", flexDirection:mob?"column":"row", alignItems:"center", justifyContent:"center", gap:mob?16:32, marginBottom:mob?36:52 }}>
-            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-              <div style={{ display:"flex" }}>
-                {["SA","MW","PN","JL","RK"].map((av,i) => (
-                  <div key={i} style={{ width:28, height:28, borderRadius:"50%", background:T.accentBg, border:`2px solid ${T.page}`, marginLeft:i===0?0:-8, display:"flex", alignItems:"center", justifyContent:"center", fontSize:9, fontWeight:700, color:T.accent, zIndex:5-i, position:"relative" }}>{av}</div>
-                ))}
-              </div>
-              <span style={{ fontSize:13.5, color:T.sub }}><span style={{ color:T.text, fontWeight:600 }}>200+</span> UK businesses using Halo</span>
-            </div>
-            {!mob && <div style={{ width:1, height:20, background:T.border }}/>}
-            <div style={{ display:"flex", alignItems:"center", gap:6 }}>
-              <div style={{ display:"flex", gap:2 }}>{[0,1,2,3,4].map(i => <span key={i} style={{ color:"#FBBF24", fontSize:14 }}>★</span>)}</div>
-              <span style={{ fontSize:13.5, color:T.sub }}><span style={{ color:T.text, fontWeight:600 }}>4.9</span> from 86 reviews</span>
-            </div>
-            {!mob && <div style={{ width:1, height:20, background:T.border }}/>}
-            <div style={{ display:"flex", alignItems:"center", gap:6 }}>
-              <div style={{ width:6, height:6, borderRadius:"50%", background:T.green }} className="halo-pulse"/>
-              <span style={{ fontSize:13.5, color:T.sub }}>Live in <span style={{ color:T.text, fontWeight:600 }}>under 10 minutes</span></span>
-            </div>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginBottom:mob?36:52 }}>
+            <div style={{ width:6, height:6, borderRadius:"50%", background:T.green }} className="halo-pulse"/>
+            <span style={{ fontSize:13.5, color:T.sub }}>Currently in <span style={{ color:T.text, fontWeight:600 }}>early access</span> — limited places available</span>
           </div>
         </FadeIn>
       </div>
@@ -1158,7 +1140,7 @@ const DemoPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav, eve
             <FadeIn delay={160}>
               <button onClick={onSignup} style={{ padding:"13px 28px", background:T.accent, border:"none", borderRadius:9, cursor:"pointer", fontSize:15, fontWeight:600, color:"#000", fontFamily:"inherit", display:"inline-flex", alignItems:"center", gap:8 }}
                 onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
-                Start free — no card needed <ArrowRight size={15}/>
+                Join early access <ArrowRight size={15}/>
               </button>
             </FadeIn>
           </div>
@@ -1200,30 +1182,31 @@ const Testimonials = () => {
   const T = T_(); const w = useW(); const mob = w < 768;
   return (
     <section style={{ padding:`${mob?64:96}px ${mob?20:28}px`, borderTop:`1px solid ${T.border}`, background:T.page }}>
-      <div style={{ maxWidth:1100, margin:"0 auto" }}>
-        <FadeIn><div style={{ textAlign:"center", marginBottom:mob?40:60 }}>
-          <p style={{ fontSize:12, fontWeight:600, color:T.accent, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:14 }}>Testimonials</p>
-          <h2 style={{ fontSize:`clamp(${mob?"26px":"30px"},3.5vw,48px)`, fontWeight:600, color:T.text, letterSpacing:"-0.03em", fontFamily:"DM Serif Display,serif", lineHeight:1.1, marginBottom:16 }}>Real businesses. Real results.</h2>
-          <div style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:12, marginBottom:8, flexWrap:"wrap" }}>
-            <div style={{ display:"flex", gap:2 }}>{[0,1,2,3,4].map(j => <span key={j} style={{ color:"#FBBF24", fontSize:16 }}>★</span>)}</div>
-            <span style={{ fontSize:14, color:T.sub }}><span style={{ color:T.text, fontWeight:600 }}>4.9 out of 5</span> — from 86 verified reviews</span>
+      <div style={{ maxWidth:820, margin:"0 auto", textAlign:"center" }}>
+        <FadeIn>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:7, padding:"5px 14px", borderRadius:99, border:`1px solid ${T.accentBd}`, background:T.accentBg, marginBottom:24 }}>
+            <Zap size={11} color={T.accent}/><span style={{ fontSize:12.5, color:T.accent, fontWeight:500 }}>Early access — limited places</span>
           </div>
-          <div style={{ display:"flex", justifyContent:"center", marginTop:18 }}><IndustryTicker/></div>
-        </div></FadeIn>
-        <div style={{ display:"grid", gridTemplateColumns:mob?"1fr":w<1024?"1fr 1fr":"repeat(3,1fr)", gap:14 }}>
-          {TESTIMONIALS.map((t, i) => (
-            <FadeIn key={i} delay={i*100}>
-              <div style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:14, padding:"28px", display:"flex", flexDirection:"column", gap:18 }}>
-                <div style={{ display:"flex", gap:2 }}>{[0,1,2,3,4].map(j => <span key={j} style={{ color:"#FBBF24", fontSize:14 }}>★</span>)}</div>
-                <p style={{ fontSize:15, color:T.text, lineHeight:1.75, flex:1, margin:0 }}>"{t.quote}"</p>
-                <div style={{ display:"flex", gap:12, alignItems:"center" }}>
-                  <div style={{ width:40, height:40, borderRadius:"50%", background:T.accentBg, border:`1px solid ${T.accentBd}`, color:T.accent, fontWeight:700, fontSize:13, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>{t.av}</div>
-                  <div><div style={{ fontSize:13.5, fontWeight:600, color:T.text }}>{t.name}</div><div style={{ fontSize:12, color:T.muted, marginTop:1 }}>{t.role}</div></div>
+          <h2 style={{ fontSize:`clamp(${mob?"26px":"30px"},3.5vw,48px)`, fontWeight:600, color:T.text, letterSpacing:"-0.03em", fontFamily:"DM Serif Display,serif", lineHeight:1.1, marginBottom:16 }}>Be one of the first.</h2>
+          <p style={{ fontSize:mob?15:18, color:T.sub, lineHeight:1.8, maxWidth:560, margin:"0 auto 36px" }}>
+            Halo is working with a small group of UK service businesses before a wider launch. If you spend too much time on customer messages, bookings, and admin — we want to hear from you.
+          </p>
+          <div style={{ display:"grid", gridTemplateColumns:mob?"1fr":w<900?"1fr 1fr":"repeat(3,1fr)", gap:12, textAlign:"left" }}>
+            {[
+              { label:"Shape the product", desc:"Your feedback directly influences what gets built. Early access businesses help define the product." },
+              { label:"Founding business status", desc:"Early access members receive preferential terms and will be recognised as founding customers at launch." },
+              { label:"Direct access to the team", desc:"Work closely with us — not a support ticket. We want to understand your business properly." },
+            ].map((b, i) => (
+              <FadeIn key={i} delay={i*80}>
+                <div style={{ padding:"20px", borderRadius:10, border:`1px solid ${T.border}`, background:T.surface }}>
+                  <div style={{ width:6, height:6, borderRadius:"50%", background:T.accent, marginBottom:12 }}/>
+                  <div style={{ fontSize:13.5, fontWeight:600, color:T.text, marginBottom:6 }}>{b.label}</div>
+                  <div style={{ fontSize:12.5, color:T.sub, lineHeight:1.6 }}>{b.desc}</div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+              </FadeIn>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -1258,7 +1241,7 @@ const PricingSection = ({ onSignup }) => {
                     {price ? <><span style={{ fontSize:44, fontWeight:700, color:T.text, fontFamily:"DM Serif Display,serif", lineHeight:1 }}>£{price}</span><span style={{ fontSize:14, color:T.sub }}>/mo</span></> : <span style={{ fontSize:32, fontWeight:700, color:T.text, fontFamily:"DM Serif Display,serif" }}>Custom</span>}
                   </div>
                   <p style={{ fontSize:13.5, color:T.sub, lineHeight:1.6, marginBottom:20 }}>{plan.desc}</p>
-                  <button onClick={onSignup} style={{ width:"100%", padding:"11px", borderRadius:8, border:`1px solid ${plan.pop?T.accent:T.border}`, background:plan.pop?T.accent:"transparent", color:plan.pop?"#000":T.text, fontSize:14, fontWeight:600, cursor:"pointer", fontFamily:"inherit", marginBottom:18 }}>{price ? "Start free trial" : "Contact us"}</button>
+                  <button onClick={onSignup} style={{ width:"100%", padding:"11px", borderRadius:8, border:`1px solid ${plan.pop?T.accent:T.border}`, background:plan.pop?T.accent:"transparent", color:plan.pop?"#000":T.text, fontSize:14, fontWeight:600, cursor:"pointer", fontFamily:"inherit", marginBottom:18 }}>{price ? "Join early access" : "Apply for founding access"}</button>
                   <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                     {plan.features.map(f => <div key={f} style={{ display:"flex", gap:10, alignItems:"flex-start" }}><Check size={13} color={T.green} style={{ marginTop:2, flexShrink:0 }}/><span style={{ fontSize:13.5, color:T.sub, lineHeight:1.5 }}>{f}</span></div>)}
                   </div>
@@ -1270,10 +1253,10 @@ const PricingSection = ({ onSignup }) => {
         <FadeIn delay={200}>
           <div style={{ marginTop:28, display:"flex", alignItems:"center", justifyContent:"center", gap:mob?16:32, flexWrap:"wrap" }}>
             {[
-              { icon:Check, text:"14-day free trial on all plans" },
+              { icon:Check, text:"Early access pricing" },
               { icon:Check, text:"No credit card required" },
               { icon:Check, text:"Cancel anytime — no lock-in" },
-              { icon:Check, text:"Live in under 10 minutes" },
+              { icon:Check, text:"Direct access to the team" },
             ].map((item,i) => (
               <div key={i} style={{ display:"flex", alignItems:"center", gap:7 }}>
                 <div style={{ width:16, height:16, borderRadius:"50%", background:T.greenBg, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
@@ -1305,7 +1288,7 @@ const HaloSetupSection = () => {
         <FadeIn>
           <div style={{ textAlign:"center", marginBottom:mob?40:60 }}>
             <p style={{ fontSize:12, fontWeight:600, color:T.accent, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:14 }}>Halo Setup</p>
-            <h2 style={{ fontSize:`clamp(${mob?"26px":"30px"},3.5vw,48px)`, fontWeight:600, color:T.text, letterSpacing:"-0.03em", fontFamily:"DM Serif Display,serif", lineHeight:1.1, marginBottom:16 }}>Up and running in 10 minutes.<br/>Not 10 days.</h2>
+            <h2 style={{ fontSize:`clamp(${mob?"26px":"30px"},3.5vw,48px)`, fontWeight:600, color:T.text, letterSpacing:"-0.03em", fontFamily:"DM Serif Display,serif", lineHeight:1.1, marginBottom:16 }}>Up and running quickly.<br/>No technical setup required.</h2>
             <p style={{ fontSize:mob?15:17, color:T.sub, lineHeight:1.7, maxWidth:520, margin:"0 auto" }}>When you join Halo, you answer a simple onboarding questionnaire. Halo builds your business profile automatically — no settings to configure, no technical knowledge required.</p>
           </div>
         </FadeIn>
@@ -1321,7 +1304,7 @@ const HaloSetupSection = () => {
           ))}
         </div>
         <FadeIn delay={200}>
-          <p style={{ textAlign:"center", fontSize:13.5, color:T.muted, marginTop:32 }}>Answer 6 questions. Halo builds your profile. Your AI employee starts working the same day.</p>
+          <p style={{ textAlign:"center", fontSize:13.5, color:T.muted, marginTop:32 }}>Answer a few questions about your business. Halo learns your tone, services, and pricing — and gets to work.</p>
         </FadeIn>
       </div>
     </section>
@@ -1371,9 +1354,9 @@ const AboutPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }) 
             <FadeIn delay={100}>
               <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
                 {[
-                  { n:"200+", label:"UK businesses using Halo", desc:"Hair studios, personal trainers, clinics, tradespeople, tutors and more." },
-                  { n:"8–12h", label:"Saved per business per week", desc:"Hours given back to owners who were drowning in messages." },
-                  { n:"<10min", label:"Average setup time", desc:"Answer 6 questions. Your AI employee starts the same day." },
+                  { n:"Early", label:"Access now open", desc:"We are working with a small group of UK service businesses before our wider launch." },
+                  { n:"8–12h", label:"Target time saving per week", desc:"The admin time Halo is designed to give back to business owners." },
+                  { n:"Simple", label:"Quick to get started", desc:"Answer a few questions about your business and Halo learns how to represent you." },
                 ].map((s, i) => (
                   <div key={i} style={{ padding:"20px 24px", borderRadius:12, border:`1px solid ${T.border}`, background:T.page }}>
                     <div style={{ fontSize:mob?28:36, fontWeight:700, color:T.accent, fontFamily:"DM Serif Display,serif", lineHeight:1, marginBottom:6 }}>{s.n}</div>
@@ -1440,12 +1423,12 @@ const PricingPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }
             </FadeIn>
             <FadeIn delay={60}>
               <h1 style={{ fontSize:`clamp(${mob?"36px":"44px"},6vw,72px)`, fontWeight:600, color:T.text, lineHeight:1.06, letterSpacing:"-0.04em", marginBottom:mob?16:20, fontFamily:"DM Serif Display,serif" }}>
-                Hire your AI employee<br/><span style={{ color:T.accent }}>from £29 a month.</span>
+                Simple, transparent<br/><span style={{ color:T.accent }}>early access pricing.</span>
               </h1>
             </FadeIn>
             <FadeIn delay={120}>
               <p style={{ fontSize:mob?16:18, color:T.sub, lineHeight:1.75, maxWidth:480, margin:"0 auto 32px" }}>
-                No HR. No sick days. No salary reviews. Just a reliable AI employee who handles your customer communications, bookings, and invoices — every day, all day.
+                Halo is in early access. Join now to help shape the product and secure founding business pricing before the full launch.
               </p>
             </FadeIn>
             <FadeIn delay={160}>
@@ -1485,7 +1468,7 @@ const PricingPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }
                         </div>
                         <button onClick={onSignup} style={{ width:"100%", padding:"13px", borderRadius:9, border:`1px solid ${plan.pop?T.accent:T.border}`, background:plan.pop?T.accent:"transparent", color:plan.pop?"#000":T.text, fontSize:14, fontWeight:600, cursor:"pointer", fontFamily:"inherit", marginBottom:24 }}
                           onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
-                          {price ? "Start 14-day free trial" : "Contact us"}
+                          {price ? "Join early access" : "Apply for founding access"}
                         </button>
                         <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                           {plan.features.map((f, fi) => (
@@ -1504,7 +1487,7 @@ const PricingPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav }
             {/* Trust pills */}
             <FadeIn delay={200}>
               <div style={{ marginTop:36, display:"flex", alignItems:"center", justifyContent:"center", gap:mob?14:32, flexWrap:"wrap" }}>
-                {["14-day free trial on all plans","No credit card required","Cancel anytime","Live in under 10 minutes"].map((t, i) => (
+                {["No credit card required","Cancel anytime","Direct access to the team","Early access pricing"].map((t, i) => (
                   <div key={i} style={{ display:"flex", alignItems:"center", gap:7 }}>
                     <div style={{ width:16, height:16, borderRadius:"50%", background:T.greenBg, display:"flex", alignItems:"center", justifyContent:"center" }}><Check size={9} color={T.green} strokeWidth={2.5}/></div>
                     <span style={{ fontSize:13, color:T.sub }}>{t}</span>
@@ -1598,11 +1581,11 @@ const CtaSection = ({ onSignup, onBookDemo }) => {
         <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:500, height:200, background:`radial-gradient(ellipse,${T.accent}12 0%,transparent 70%)`, pointerEvents:"none" }}/>
         <FadeIn><div style={{ position:"relative" }}>
           <div style={{ width:52, height:52, borderRadius:13, background:T.accent, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 24px" }}><Bot size={26} color="#000" strokeWidth={2.5}/></div>
-          <h2 style={{ fontSize:`clamp(${mob?"32px":"36px"},5vw,60px)`, fontWeight:600, color:T.text, letterSpacing:"-0.04em", lineHeight:1.1, marginBottom:18, fontFamily:"DM Serif Display,serif" }}>Your AI employee<br/>is ready to start.</h2>
-          <p style={{ fontSize:mob?15:18, color:T.sub, lineHeight:1.7, marginBottom:36, maxWidth:500, margin:"0 auto 36px" }}>Halo isn't just selling AI. It's selling time and peace of mind. Your business keeps running, messages get answered, invoices go out, bookings get confirmed — and you only hear from Halo when something genuinely needs you. Set up in 10 minutes. Free for 14 days.</p>
+          <h2 style={{ fontSize:`clamp(${mob?"32px":"36px"},5vw,60px)`, fontWeight:600, color:T.text, letterSpacing:"-0.04em", lineHeight:1.1, marginBottom:18, fontFamily:"DM Serif Display,serif" }}>Join early access.</h2>
+          <p style={{ fontSize:mob?15:18, color:T.sub, lineHeight:1.7, marginBottom:36, maxWidth:500, margin:"0 auto 36px" }}>Halo is preparing for its first customers. If you run a UK service business and spend too much time on messages, bookings, and admin — we want to hear from you. Join the early access list and be part of what we build.</p>
           <div style={{ display:"flex", flexDirection:mob?"column":"row", gap:12, justifyContent:"center" }}>
             <button onClick={onSignup} style={{ padding:"14px 32px", background:T.accent, border:"none", borderRadius:9, cursor:"pointer", fontSize:15, fontWeight:600, color:"#000", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:8, width:mob?"100%":"auto" }}
-              onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>Get started free <ArrowRight size={15}/></button>
+              onMouseEnter={e=>e.currentTarget.style.opacity=".84"} onMouseLeave={e=>e.currentTarget.style.opacity="1"}>Join early access <ArrowRight size={15}/></button>
             <button onClick={onBookDemo} style={{ padding:"14px 32px", background:"transparent", border:`1px solid ${T.border}`, borderRadius:9, cursor:"pointer", fontSize:15, color:T.sub, fontFamily:"inherit", width:mob?"100%":"auto" }}
               onMouseEnter={e=>{e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.color=T.text;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border;e.currentTarget.style.color=T.sub;}}>Book a demo</button>
           </div>
@@ -1682,7 +1665,7 @@ const StickyMobileCta = ({ onSignup }) => {
   if (w >= 768) return null;
   return (
     <div style={{ position:"fixed", bottom:0, left:0, right:0, zIndex:200, padding:"12px 16px 20px", background:T.isDark?"rgba(10,10,10,0.96)":"rgba(250,250,250,0.96)", backdropFilter:"blur(12px)", borderTop:`1px solid ${T.border}`, transform:vis?"translateY(0)":"translateY(100%)", transition:"transform 0.3s ease" }}>
-      <button onClick={onSignup} style={{ width:"100%", padding:"14px", background:T.accent, border:"none", borderRadius:10, cursor:"pointer", fontSize:15, fontWeight:600, color:"#000", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}>Get started free <ArrowRight size={15}/></button>
+      <button onClick={onSignup} style={{ width:"100%", padding:"14px", background:T.accent, border:"none", borderRadius:10, cursor:"pointer", fontSize:15, fontWeight:600, color:"#000", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}>Join early access <ArrowRight size={15}/></button>
     </div>
   );
 };
@@ -1697,7 +1680,7 @@ const HowItWorks = () => {
           <h2 style={{ fontSize:`clamp(${mob?"28px":"32px"},4vw,52px)`, fontWeight:600, color:T.text, letterSpacing:"-0.03em", fontFamily:"DM Serif Display,serif", lineHeight:1.1 }}>Message to action in seconds.</h2>
         </div></FadeIn>
         <div style={{ display:"grid", gridTemplateColumns:`repeat(${cols},1fr)` }}>
-          {[{n:"01",t:"Message arrives",d:"A customer reaches out via WhatsApp, Instagram DM, email, or your website. Halo picks it up the moment it lands."},{n:"02",t:"Halo classifies",d:"Intent, urgency, and confidence are assessed in under two seconds. Halo knows what the message means and what to do with it."},{n:"03",t:"Auto-handle or notify",d:"High-confidence replies go out instantly. Anything below threshold comes to you as a one-tap WhatsApp approval."},{n:"04",t:"You stay informed",d:"Business reports land on your schedule — daily, weekly, or monthly — via WhatsApp or email. Every decision logged."}].map((s, i) => (
+          {[{n:"01",t:"Message arrives",d:"A customer reaches out via WhatsApp, Instagram DM, email, or your website. Halo picks it up the moment it lands."},{n:"02",t:"Halo classifies",d:"Intent, urgency, and confidence are assessed automatically. Halo determines what the message means and what action to take."},{n:"03",t:"Auto-handle or notify",d:"High-confidence replies go out instantly. Anything below threshold comes to you as a one-tap WhatsApp approval."},{n:"04",t:"You stay informed",d:"Business reports land on your schedule — daily, weekly, or monthly — via WhatsApp or email. Every decision logged."}].map((s, i) => (
             <FadeIn key={i} delay={i*80}>
               <div style={{ padding:mob?"24px 0":cols===4?"28px 32px":"28px", borderRight:cols===4&&i<3?`1px solid ${T.border}`:"none", borderBottom:mob&&i<3?`1px solid ${T.border}`:"none" }}>
                 <div style={{ fontSize:12, fontWeight:700, color:T.accent, marginBottom:14, letterSpacing:"0.06em" }}>{s.n}</div>
@@ -1733,7 +1716,7 @@ const IntegrationsSection = () => {
 };
 
 const FT_TABS = [
-  { id:"events",        Icon:Zap,           label:"Event Intelligence",  headline:"Every message becomes a structured business action.", body:"Halo reads incoming messages across all your channels, classifies intent in under two seconds, and either acts automatically or sends you a one-tap approval.", stat:"< 2s", statLabel:"classification time", points:["Works across WhatsApp, Instagram, email and web","Confidence score on every classification","Auto-handle or send for your approval"] },
+  { id:"events",        Icon:Zap,           label:"Event Intelligence",  headline:"Every message becomes a structured business action.", body:"Halo reads incoming messages across all your channels, classifies intent automatically, and either acts or sends you a one-tap approval.", stat:"Smart", statLabel:"classification", points:["Works across WhatsApp, Instagram, email and web","Confidence score on every classification","Auto-handle or send for your approval"] },
   { id:"notifications", Icon:MessageSquare, label:"Owner Notifications", headline:"Stay in control without watching a dashboard.", body:"When Halo needs your input, it sends a WhatsApp message directly to your phone with context, a suggested reply, and inline approve or dismiss buttons.", stat:"1 tap", statLabel:"to approve and send", points:["Delivered to your WhatsApp — no app to open","Full message context included every time","Edit the reply before it sends"] },
   { id:"assistant",     Icon:Bot,           label:"AI Assistant",        headline:"A sharp business advisor, always on call.", body:"Draft comms, work through pricing, handle difficult client situations, generate invoice reminders. It thinks like an experienced ops manager.", stat:"24/7", statLabel:"always available", points:["Trained on your business context and tone","Ask anything — pricing, policy, client issues","Responses in seconds, not hours"] },
   { id:"pipeline",      Icon:Play,          label:"AI Pipeline",         headline:"See exactly how Halo thinks.", body:"Every message passes through a four-stage classification pipeline. Intent, urgency, suggested reply, and WhatsApp notification built in real time.", stat:"4", statLabel:"pipeline stages", points:["Intent · Urgency · Reply · Notify","Full audit log of every decision","Override or correct any output"] },
@@ -2236,12 +2219,137 @@ const InvoicesPage = ({ isDark, onToggle, onSignin, onSignup, onBookDemo, onNav 
   );
 };
 
+const EarlyAccessScreen = ({ onBack, isDark, onToggle }) => {
+  const T = T_(); const w = useW(); const mob = w < 640;
+  const [form, setForm] = useState({ name:"", business:"", email:"", industry:"", enquiries:"" });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+
+  const INDUSTRIES = ["Hair and Beauty","Personal Training / Fitness","Wellness and Therapy","Trades (Plumbing, Electrical, etc.)","Tutoring / Coaching","Photography","Dog Grooming","Other"];
+  const ENQUIRY_RANGES = ["Fewer than 10 per week","10–30 per week","30–75 per week","75–150 per week","More than 150 per week"];
+
+  const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
+  const inputStyle = { width:"100%", padding:"11px 14px", borderRadius:8, border:`1px solid ${T.border}`, background:T.input, color:T.text, fontSize:14, outline:"none", fontFamily:"inherit", boxSizing:"border-box" };
+  const labelStyle = { display:"block", fontSize:13, fontWeight:500, color:T.sub, marginBottom:6 };
+
+  const submit = async () => {
+    const { name, business, email, industry, enquiries } = form;
+    if (!name || !business || !email || !industry || !enquiries) { setErr("Please fill in all fields."); return; }
+    if (!email.includes("@")) { setErr("Please enter a valid email address."); return; }
+    setErr(""); setLoading(true);
+    await new Promise(r => setTimeout(r, 900));
+    setLoading(false); setSubmitted(true);
+  };
+
+  return (
+    <div style={{ minHeight:"100vh", background:T.page, display:"flex", flexDirection:"column" }}>
+      {/* Header */}
+      <div style={{ height:60, borderBottom:`1px solid ${T.border}`, display:"flex", alignItems:"center", justifyContent:"space-between", padding:`0 ${mob?18:28}px` }}>
+        <button onClick={onBack} style={{ display:"flex", alignItems:"center", gap:8, background:"none", border:"none", cursor:"pointer" }}>
+          <div style={{ width:26, height:26, borderRadius:6, background:T.accent, display:"flex", alignItems:"center", justifyContent:"center" }}><Bot size={13} color="#000" strokeWidth={2.5}/></div>
+          <span style={{ fontSize:16, fontWeight:600, color:T.text, fontFamily:"DM Serif Display,serif" }}>halo</span>
+        </button>
+        <ThemeBtn isDark={isDark} onToggle={onToggle}/>
+      </div>
+
+      <div style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", padding:mob?"24px 18px":"40px 28px" }}>
+        <div style={{ width:"100%", maxWidth:480 }}>
+
+          {submitted ? (
+            /* Confirmation state */
+            <div style={{ textAlign:"center" }}>
+              <div style={{ width:56, height:56, borderRadius:14, background:T.accentBg, border:`1px solid ${T.accentBd}`, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 24px" }}>
+                <Check size={24} color={T.accent} strokeWidth={2}/>
+              </div>
+              <h1 style={{ fontSize:mob?24:28, fontWeight:600, color:T.text, marginBottom:12, fontFamily:"DM Serif Display,serif" }}>Application received.</h1>
+              <p style={{ fontSize:15, color:T.sub, lineHeight:1.75, maxWidth:380, margin:"0 auto 28px" }}>
+                Thanks for applying. We'll review your details and be in touch with next steps.
+              </p>
+              <div style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:10, padding:"16px 20px", textAlign:"left", marginBottom:24 }}>
+                <div style={{ fontSize:11, fontWeight:600, color:T.accent, letterSpacing:"0.08em", marginBottom:10 }}>WHAT HAPPENS NEXT</div>
+                {[
+                  "We review your application — usually within 2–3 business days.",
+                  "If you're a good fit, we'll reach out to arrange a short call.",
+                  "You'll be guided through setting up Halo for your business.",
+                ].map((s, i) => (
+                  <div key={i} style={{ display:"flex", gap:10, alignItems:"flex-start", marginBottom:i<2?8:0 }}>
+                    <div style={{ width:18, height:18, borderRadius:"50%", background:T.accentBg, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:1 }}>
+                      <span style={{ fontSize:9, color:T.accent, fontWeight:700 }}>{i+1}</span>
+                    </div>
+                    <span style={{ fontSize:13, color:T.sub, lineHeight:1.55 }}>{s}</span>
+                  </div>
+                ))}
+              </div>
+              <button onClick={onBack} style={{ background:"transparent", border:`1px solid ${T.border}`, borderRadius:8, padding:"10px 20px", color:T.sub, fontSize:13.5, cursor:"pointer", fontFamily:"inherit" }}>
+                Back to Halo
+              </button>
+            </div>
+          ) : (
+            /* Application form */
+            <>
+              <div style={{ marginBottom:28 }}>
+                <div style={{ display:"inline-flex", alignItems:"center", gap:6, padding:"4px 12px", borderRadius:99, border:`1px solid ${T.accentBd}`, background:T.accentBg, marginBottom:16 }}>
+                  <Zap size={10} color={T.accent}/><span style={{ fontSize:11.5, color:T.accent, fontWeight:500 }}>Early access — limited places</span>
+                </div>
+                <h1 style={{ fontSize:mob?24:28, fontWeight:600, color:T.text, marginBottom:10, fontFamily:"DM Serif Display,serif" }}>Apply for founding access.</h1>
+                <p style={{ fontSize:14, color:T.sub, lineHeight:1.7 }}>We're onboarding a limited number of UK service businesses to help shape Halo before launch.</p>
+              </div>
+
+              {err && <div style={{ fontSize:13, color:T.red, background:T.redBg, border:`1px solid ${T.red}22`, borderRadius:7, padding:"10px 14px", marginBottom:14 }}>{err}</div>}
+
+              <div style={{ display:"flex", flexDirection:"column", gap:12, marginBottom:20 }}>
+                <div>
+                  <label style={labelStyle}>Your name</label>
+                  <input type="text" value={form.name} onChange={set("name")} placeholder="Jennifer O." style={inputStyle}
+                    onFocus={e=>e.target.style.borderColor=T.accent} onBlur={e=>e.target.style.borderColor=T.border}/>
+                </div>
+                <div>
+                  <label style={labelStyle}>Business name</label>
+                  <input type="text" value={form.business} onChange={set("business")} placeholder="Glow Studio London" style={inputStyle}
+                    onFocus={e=>e.target.style.borderColor=T.accent} onBlur={e=>e.target.style.borderColor=T.border}/>
+                </div>
+                <div>
+                  <label style={labelStyle}>Email address</label>
+                  <input type="email" value={form.email} onChange={set("email")} placeholder="you@yourbusiness.com" style={inputStyle}
+                    onFocus={e=>e.target.style.borderColor=T.accent} onBlur={e=>e.target.style.borderColor=T.border}/>
+                </div>
+                <div>
+                  <label style={labelStyle}>Industry</label>
+                  <select value={form.industry} onChange={set("industry")} style={{ ...inputStyle, appearance:"none", cursor:"pointer", color:form.industry?T.text:T.sub }}>
+                    <option value="" disabled>Select your industry</option>
+                    {INDUSTRIES.map(i => <option key={i} value={i} style={{ background:T.surface, color:T.text }}>{i}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label style={labelStyle}>Customer enquiries per week</label>
+                  <select value={form.enquiries} onChange={set("enquiries")} style={{ ...inputStyle, appearance:"none", cursor:"pointer", color:form.enquiries?T.text:T.sub }}>
+                    <option value="" disabled>Roughly how many?</option>
+                    {ENQUIRY_RANGES.map(r => <option key={r} value={r} style={{ background:T.surface, color:T.text }}>{r}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <button onClick={!loading?submit:undefined} style={{ width:"100%", padding:"13px", background:T.accent, border:"none", borderRadius:8, color:"#000", fontSize:15, fontWeight:600, cursor:loading?"default":"pointer", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:8, opacity:loading?.8:1, marginBottom:14 }}>
+                {loading ? <><RefreshCw size={15} style={{ animation:"halo-spin 0.8s linear infinite" }}/> Submitting...</> : <>Request access <ArrowRight size={15}/></>}
+              </button>
+              <p style={{ fontSize:12, color:T.muted, textAlign:"center", lineHeight:1.6 }}>
+                No account created at this stage. We'll contact you to discuss next steps.
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const AuthScreen = ({ mode, onSuccess, onSwitch, onBack, isDark, onToggle }) => {
-  const T = T_(); const w = useW(); const mob = w < 640; const isUp = mode==="signup";
-  const [email,setEmail]=useState(""); const [pw,setPw]=useState(""); const [name,setName]=useState("");
+  const T = T_(); const w = useW(); const mob = w < 640;
+  const [email,setEmail]=useState(""); const [pw,setPw]=useState("");
   const [showPw,setShowPw]=useState(false); const [loading,setLoading]=useState(false); const [err,setErr]=useState("");
   const submit = async () => {
-    if (!email||!pw||(isUp&&!name)) { setErr("Please fill in all fields."); return; }
+    if (!email||!pw) { setErr("Please fill in all fields."); return; }
     if (pw.length<6) { setErr("Password must be at least 6 characters."); return; }
     setErr(""); setLoading(true); await new Promise(r=>setTimeout(r,900)); setLoading(false); onSuccess();
   };
@@ -2257,18 +2365,11 @@ const AuthScreen = ({ mode, onSuccess, onSwitch, onBack, isDark, onToggle }) => 
       <div style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", padding:mob?"24px 18px":"40px 28px" }}>
         <div style={{ width:"100%", maxWidth:400 }}>
           <div style={{ marginBottom:28, textAlign:"center" }}>
-            <h1 style={{ fontSize:mob?24:28, fontWeight:600, color:T.text, marginBottom:10, fontFamily:"DM Serif Display,serif" }}>{isUp?"Create your account":"Welcome back"}</h1>
-            <p style={{ fontSize:14.5, color:T.sub }}>{isUp?"14-day free trial. No credit card required.":"Sign in to your Halo workspace."}</p>
+            <h1 style={{ fontSize:mob?24:28, fontWeight:600, color:T.text, marginBottom:10, fontFamily:"DM Serif Display,serif" }}>Welcome back</h1>
+            <p style={{ fontSize:14.5, color:T.sub }}>Sign in to your Halo workspace.</p>
           </div>
           {err && <div style={{fontSize:13,color:T.red,background:T.redBg,border:`1px solid ${T.red}22`,borderRadius:7,padding:"10px 14px",marginBottom:14}}>{err}</div>}
           <div style={{ display:"flex", flexDirection:"column", gap:12, marginBottom:18 }}>
-            {isUp && (
-              <div>
-                <label style={{display:"block",fontSize:13,fontWeight:500,color:T.sub,marginBottom:6}}>Full name</label>
-                <input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Jennifer O." style={{width:"100%",padding:"11px 14px",borderRadius:8,border:`1px solid ${T.border}`,background:T.input,color:T.text,fontSize:14,outline:"none",fontFamily:"inherit",boxSizing:"border-box"}}
-                  onFocus={e=>e.target.style.borderColor=T.accent} onBlur={e=>e.target.style.borderColor=T.border}/>
-              </div>
-            )}
             <div>
               <label style={{display:"block",fontSize:13,fontWeight:500,color:T.sub,marginBottom:6}}>Email</label>
               <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@yourbusiness.com" style={{width:"100%",padding:"11px 14px",borderRadius:8,border:`1px solid ${T.border}`,background:T.input,color:T.text,fontSize:14,outline:"none",fontFamily:"inherit",boxSizing:"border-box"}}
@@ -2276,18 +2377,18 @@ const AuthScreen = ({ mode, onSuccess, onSwitch, onBack, isDark, onToggle }) => 
             </div>
             <div>
               <label style={{display:"block",fontSize:13,fontWeight:500,color:T.sub,marginBottom:6}}>Password</label>
-              <div style={{display:"flex",alignItems:"center",background:T.input,border:`1px solid ${T.border}`,borderRadius:8,padding:"0 14px",height:46,transition:"border-color 0.15s"}}
+              <div style={{display:"flex",alignItems:"center",background:T.input,border:`1px solid ${T.border}`,borderRadius:8,padding:"0 14px",height:46}}
                 onFocusCapture={e=>e.currentTarget.style.borderColor=T.accent} onBlurCapture={e=>e.currentTarget.style.borderColor=T.border}>
-                <input type={showPw?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)} placeholder={isUp?"Min. 6 characters":"Your password"} style={{flex:1,border:"none",background:"transparent",fontSize:14,color:T.text,outline:"none",fontFamily:"inherit"}}/>
+                <input type={showPw?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)} placeholder="Your password" style={{flex:1,border:"none",background:"transparent",fontSize:14,color:T.text,outline:"none",fontFamily:"inherit"}}/>
                 <button onClick={()=>setShowPw(v=>!v)} style={{background:"none",border:"none",cursor:"pointer",color:T.muted,display:"flex",alignItems:"center"}}>{showPw?<EyeOff size={15}/>:<Eye size={15}/>}</button>
               </div>
             </div>
           </div>
           <button onClick={!loading?submit:undefined} style={{width:"100%",padding:"13px",background:T.accent,border:"none",borderRadius:8,color:"#000",fontSize:15,fontWeight:600,cursor:loading?"default":"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",justifyContent:"center",gap:8,opacity:loading?.8:1}}>
-            {loading?<><RefreshCw size={15} style={{animation:"halo-spin 0.8s linear infinite"}}/>{isUp?"Creating account...":"Signing in..."}</>:isUp?"Create account":"Sign in"}
+            {loading?<><RefreshCw size={15} style={{animation:"halo-spin 0.8s linear infinite"}}/>Signing in...</>:"Sign in"}
           </button>
           <div style={{borderTop:`1px solid ${T.border}`,paddingTop:16,textAlign:"center",marginTop:16}}>
-            <span style={{fontSize:13.5,color:T.sub}}>{isUp?"Already have an account? ":"Don't have an account? "}<button onClick={onSwitch} style={{background:"none",border:"none",cursor:"pointer",color:T.accent,fontFamily:"inherit",fontSize:13.5,fontWeight:600}}>{isUp?"Sign in":"Sign up free"}</button></span>
+            <span style={{fontSize:13.5,color:T.sub}}>Want to join early access? <button onClick={onSwitch} style={{background:"none",border:"none",cursor:"pointer",color:T.accent,fontFamily:"inherit",fontSize:13.5,fontWeight:600}}>Apply here</button></span>
           </div>
         </div>
       </div>
@@ -2967,10 +3068,12 @@ export default function App() {
           <PricingPage isDark={isDark} onToggle={()=>setIsDark(d=>!d)} onSignin={()=>navigate("signin")} onSignup={()=>navigate("signup")} onBookDemo={openDemo} onNav={onNavClick}/>
         )}
 
-        {(screen === "signin" || screen === "signup") && (
-          <div style={{ animation:"halo-screen 0.3s ease" }}>
-            <AuthScreen mode={screen} onSuccess={()=>navigate("app")} onSwitch={()=>navigate(screen==="signin"?"signup":"signin")} onBack={()=>navigate("website")} isDark={isDark} onToggle={()=>setIsDark(d=>!d)}/>
-          </div>
+        {screen === "signup" && (
+          <EarlyAccessScreen isDark={isDark} onToggle={()=>setIsDark(d=>!d)} onBack={()=>navigate("website")}/>
+        )}
+
+        {screen === "signin" && (
+          <AuthScreen mode="signin" onSuccess={()=>navigate("app")} onSwitch={()=>navigate("signup")} onBack={()=>navigate("website")} isDark={isDark} onToggle={()=>setIsDark(d=>!d)}/>
         )}
 
         {screen === "app" && (
