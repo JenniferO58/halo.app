@@ -2234,9 +2234,11 @@ const EarlyAccessScreen = ({ onBack, isDark, onToggle }) => {
   const labelStyle = { display:"block", fontSize:13, fontWeight:500, color:T.sub, marginBottom:6 };
 
   const submit = async () => {
-    const { name, business, email, industry, enquiries } = form;
+    const { name, business, email, industry, enquiries, industryOther } = form;
     if (!name || !business || !email || !industry || !enquiries) { setErr("Please fill in all fields."); return; }
+    if (industry === "Other" && !industryOther) { setErr("Please specify your industry."); return; }
     if (!email.includes("@")) { setErr("Please enter a valid email address."); return; }
+    const finalIndustry = industry === "Other" ? industryOther : industry;
     setErr(""); setLoading(true);
     try {
       const res = await fetch('/api/waitlist', {
@@ -2246,7 +2248,7 @@ const EarlyAccessScreen = ({ onBack, isDark, onToggle }) => {
           name,
           business_name: business,
           email,
-          industry,
+          industry: finalIndustry,
           enquiries_per_week: enquiries,
         }),
       });
@@ -2338,6 +2340,10 @@ const EarlyAccessScreen = ({ onBack, isDark, onToggle }) => {
                     <option value="" disabled>Select your industry</option>
                     {INDUSTRIES.map(i => <option key={i} value={i} style={{ background:T.surface, color:T.text }}>{i}</option>)}
                   </select>
+                  {form.industry === "Other" && (
+                    <input type="text" value={form.industryOther||""} onChange={e=>setForm(f=>({...f,industryOther:e.target.value}))} placeholder="Please specify your industry" style={{ ...inputStyle, marginTop:8 }}
+                      onFocus={e=>e.target.style.borderColor=T.accent} onBlur={e=>e.target.style.borderColor=T.border}/>
+                  )}
                 </div>
                 <div>
                   <label style={labelStyle}>Customer enquiries per week</label>
