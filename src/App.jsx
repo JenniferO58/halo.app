@@ -2238,8 +2238,26 @@ const EarlyAccessScreen = ({ onBack, isDark, onToggle }) => {
     if (!name || !business || !email || !industry || !enquiries) { setErr("Please fill in all fields."); return; }
     if (!email.includes("@")) { setErr("Please enter a valid email address."); return; }
     setErr(""); setLoading(true);
-    await new Promise(r => setTimeout(r, 900));
-    setLoading(false); setSubmitted(true);
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          business_name: business,
+          email,
+          industry,
+          enquiries_per_week: enquiries,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong');
+      setSubmitted(true);
+    } catch (e) {
+      setErr(e.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
